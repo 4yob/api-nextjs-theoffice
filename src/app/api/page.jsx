@@ -4,7 +4,7 @@ import React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
 
-export default function Page() {
+export default function Api() {
   const [cartoons, setCartoons] = useState([]);
   const [loading, setLoading] = useState(false);
 
