@@ -1,6 +1,6 @@
 # 🗂️ Projeto TCC - "The Office" Série de TV
 
-Bem-vindo ao repositório do projeto de TCC desenvolvido por **Alejandra Barros**! Este site foi criado para reunir informações, análises e materiais sobre o universo da série "The Office", explorando seus personagens, episódios marcantes, curiosidades e impacto cultural.
+Bem-vindo ao meu repositório do projeto de TCC! Este site foi criado para reunir informações, análises e materiais sobre o universo da série "The Office", explorando seus personagens, episódios marcantes, curiosidades e impacto cultural.
 
 ## ✨ Sobre o Projeto
 Este projeto tem como objetivo explorar, documentar e apresentar referências, curiosidades e estudos sobre a série "The Office". Todo o conteúdo foi pensado para ser visualmente agradável, intuitivo e informativo, proporcionando uma imersão no universo da série.
