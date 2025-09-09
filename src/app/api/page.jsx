@@ -1,16 +1,15 @@
 "use client";
 
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
 
 export default function Api() {
   const [personagens, setPersonagens] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const buscarPersonagens = async () => {
-    setLoading(true);
     try {
       const response = await axios.get("https://theofficeapi.dev/api/characters");
       const data = response.data;
@@ -22,110 +21,130 @@ export default function Api() {
     }
   };
 
+  useEffect(() => {
+    buscarPersonagens();
+  }, []);
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-200 via-orange-300 to-amber-200 p-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-extrabold text-amber-900 mb-4 drop-shadow-lg">
-            📺 The Office Characters
+    <div className="min-h-screen bg-gradient-to-br from-neutral-900 via-stone-900 to-black text-white">
+      <div className="max-w-6xl mx-auto px-6 py-16">
+        <header className="text-center mb-20">
+          <h1 className="text-5xl font-light mb-6 tracking-wide bg-gradient-to-r from-amber-200 via-stone-300 to-amber-100 bg-clip-text text-transparent">
+            The Office Characters
           </h1>
-          <p className="text-xl text-amber-800 mb-8 font-medium">
+          <p className="text-stone-300 text-lg mb-12 max-w-2xl mx-auto leading-relaxed">
             Conheça os personagens icônicos da série The Office
           </p>
-          
-          <button 
-            onClick={buscarPersonagens} 
-            disabled={loading} 
-            className="bg-gradient-to-r from-amber-900 to-amber-700 text-white px-10 py-4 rounded-full 
-                     hover:from-amber-800 hover:to-amber-600 disabled:from-gray-400 disabled:to-gray-500 
-                     font-bold text-lg shadow-lg transform hover:scale-105 transition-all duration-200
-                     disabled:transform-none disabled:cursor-not-allowed"
+
+          <button
+            onClick={buscarPersonagens}
+            disabled={loading}
+            className="bg-gradient-to-r from-amber-700 to-amber-800 text-white px-10 py-4 text-sm font-medium tracking-wide
+                     hover:from-amber-600 hover:to-amber-700 disabled:from-gray-700 disabled:to-gray-600
+                     transition-all duration-300 disabled:cursor-not-allowed rounded-lg
+                     shadow-lg hover:shadow-xl hover:scale-105 transform"
           >
             {loading ? (
-              <span className="flex items-center gap-2">
-                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+              <span className="flex items-center gap-3">
+                <div className="animate-spin w-5 h-5 border-2 border-white border-t-transparent rounded-full"></div>
                 Carregando...
               </span>
             ) : (
-              "🔍 Buscar Personagens"
+              "Buscar Personagens"
             )}
           </button>
-        </div>
-      </div>
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {personagens.map((personagem) => (
-            <Link key={personagem.id} href={`/characters/${personagem.id}`}>
-              <div className="bg-white rounded-xl shadow-xl hover:shadow-2xl transform hover:scale-105 
-                            transition-all duration-300 overflow-hidden border border-amber-200 
-                            hover:border-amber-400 cursor-pointer">
-                <div className="bg-gradient-to-r from-amber-100 to-orange-100 p-4 border-b border-amber-200">
-                  <h3 className="font-bold text-xl text-amber-900 text-center truncate">
-                    {personagem.name || "Nome não disponível"}
-                  </h3>
-                </div>
-                
-                <div className="p-6 space-y-3">
-                  <div className="flex items-center gap-2">
-                    <span className="text-2xl">👤</span>
-                    <div>
-                      <p className="text-xs text-gray-500 uppercase tracking-wide">Gênero</p>
-                      <p className="text-gray-800 font-medium">
-                        {personagem.gender || "Não informado"}
-                      </p>
+        </header>
+
+        <main>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {personagens.map((personagem) => (
+              <Link key={personagem.id} href={`/api/${personagem.id}`}>
+                <article className="bg-gradient-to-br from-stone-800/40 to-neutral-900/60 backdrop-blur-sm 
+                                 border border-stone-700/50 rounded-xl p-6 
+                                 hover:from-stone-700/50 hover:to-neutral-800/70 hover:border-amber-600/40
+                                 transition-all duration-300 cursor-pointer group
+                                 hover:scale-105 hover:shadow-2xl hover:shadow-amber-900/20">
+                  
+                  <header className="mb-6">
+                    <h2 className="text-xl font-medium text-amber-100 group-hover:text-amber-200 transition-colors duration-300">
+                      {personagem.name || "Nome não disponível"}
+                    </h2>
+                  </header>
+
+                  <div className="space-y-4 text-sm">
+                    <div className="flex items-center gap-3">
+                      <div className="w-2 h-2 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full"></div>
+                      <div>
+                        <span className="text-stone-400 text-xs uppercase tracking-wider block mb-1">
+                          Gênero
+                        </span>
+                        <span className="text-stone-200">
+                          {personagem.gender || "Não informado"}
+                        </span>
+                      </div>
                     </div>
+
+                    {personagem.marital && (
+                      <div className="flex items-center gap-3">
+                        <div className="w-2 h-2 bg-gradient-to-r from-rose-400 to-pink-500 rounded-full"></div>
+                        <div>
+                          <span className="text-stone-400 text-xs uppercase tracking-wider block mb-1">
+                            Estado Civil
+                          </span>
+                          <span className="text-stone-200">{personagem.marital}</span>
+                        </div>
+                      </div>
+                    )}
+
+                    {personagem.job && personagem.job.length > 0 && (
+                      <div className="flex items-center gap-3">
+                        <div className="w-2 h-2 bg-gradient-to-r from-emerald-400 to-teal-500 rounded-full"></div>
+                        <div>
+                          <span className="text-stone-400 text-xs uppercase tracking-wider block mb-1">
+                            Profissão
+                          </span>
+                          <span className="text-stone-200">
+                            {Array.isArray(personagem.job) ? personagem.job[0] : personagem.job}
+                          </span>
+                        </div>
+                      </div>
+                    )}
+
+                    {personagem.actor && (
+                      <div className="flex items-center gap-3">
+                        <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-full"></div>
+                        <div>
+                          <span className="text-stone-400 text-xs uppercase tracking-wider block mb-1">
+                            Ator
+                          </span>
+                          <span className="text-stone-200">{personagem.actor}</span>
+                        </div>
+                      </div>
+                    )}
                   </div>
-                  
-                  {personagem.marital && (
-                    <div className="flex items-center gap-2">
-                      <span className="text-2xl">💕</span>
-                      <div>
-                        <p className="text-xs text-gray-500 uppercase tracking-wide">Estado Civil</p>
-                        <p className="text-gray-800 font-medium">{personagem.marital}</p>
-                      </div>
-                    </div>
-                  )}
-                  
-                  {personagem.job && personagem.job.length > 0 && (
-                    <div className="flex items-start gap-2">
-                      <span className="text-2xl">💼</span>
-                      <div className="flex-1">
-                        <p className="text-xs text-gray-500 uppercase tracking-wide">Profissão</p>
-                        <p className="text-gray-800 font-medium text-sm">
-                          {Array.isArray(personagem.job) ? personagem.job[0] : personagem.job}
-                        </p>
-                      </div>
-                    </div>
-                  )}
-                  
-                  {personagem.actor && (
-                    <div className="flex items-center gap-2">
-                      <span className="text-2xl">🎭</span>
-                      <div>
-                        <p className="text-xs text-gray-500 uppercase tracking-wide">Ator</p>
-                        <p className="text-gray-800 font-medium">{personagem.actor}</p>
-                      </div>
-                    </div>
-                  )}
-                </div>
-                
-                <div className="bg-gradient-to-r from-amber-50 to-orange-50 px-6 py-3 border-t border-amber-200">
-                  <p className="text-center text-amber-700 font-medium text-sm">
-                    Clique para ver detalhes →
-                  </p>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-        
-        {personagens.length === 0 && !loading && (
-          <div className="text-center py-16">
-            <div className="text-6xl mb-4">📋</div>
-            <h3 className="text-2xl font-bold text-amber-900 mb-2">Nenhum personagem encontrado</h3>
-            <p className="text-amber-700">Clique no botão acima para buscar os personagens!</p>
+
+                  <footer className="mt-6 pt-4 border-t border-stone-700/50 group-hover:border-amber-600/40 transition-colors duration-300">
+                    <span className="text-xs text-stone-400 group-hover:text-amber-300 transition-colors duration-300 flex items-center gap-2">
+                      Ver detalhes 
+                      <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
+                    </span>
+                  </footer>
+                </article>
+              </Link>
+            ))}
           </div>
-        )}
+
+          {personagens.length === 0 && !loading && (
+            <div className="text-center py-20">
+              <h3 className="text-3xl font-light bg-gradient-to-r from-stone-400 to-stone-600 bg-clip-text text-transparent mb-6">
+                Nenhum personagem encontrado
+              </h3>
+              <p className="text-stone-400">
+                Clique no botão acima para buscar os personagens
+              </p>
+            </div>
+          )}
+        </main>
       </div>
     </div>
   )

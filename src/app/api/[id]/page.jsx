@@ -9,8 +9,6 @@ export default function CharacterDetailsPage({ params }) {
     const [personagem, setPersonagem] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    const resolvedParams = use(params);
-
     const fetchPersonagem = async (id) => {
         try {
             const response = await axios.get(`https://theofficeapi.dev/api/characters/${id}`);
@@ -23,30 +21,38 @@ export default function CharacterDetailsPage({ params }) {
     }
 
     useEffect(() => {
-        if (resolvedParams.id) {
-            fetchPersonagem(resolvedParams.id);
+        if (params?.id) {
+            fetchPersonagem(params.id);
         }
-    }, [resolvedParams.id]);
+    }, [params?.id]);
 
     if (loading) {
-        return <div>Carregando...</div>;
+        return (
+            <div>
+                <p>Carregando...</p>
+            </div>
+        );
     }
 
-    if (!character) {
-        return <div>Personagem não encontrado.</div>;
+    if (!personagem) {
+        return (
+            <div>
+                <p>Personagem não encontrado</p>
+            </div>
+        );
     }
 
     return (
         <div className={styles.characterDetails}>
-            <h1>{character.name}</h1>
-            <p>Gênero: {character.gender}</p>
-            <p>Estado Civil: {character.marital}</p>
-            <p>Profissão: {character.job}</p>
-            <p>Local de Trabalho: {character.workplace}</p>
-            <p>Primeira Aparição: {character.firstAppearance}</p>
-            <p>Última Aparição: {character.lastAppearance}</p>
-            <p>Ator: {character.actor}</p>
-            <Link href="/characters">Voltar</Link>
+            <h1>{personagem.name}</h1>
+            <p>Gênero: {personagem.gender}</p>
+            <p>Estado Civil: {personagem.marital}</p>
+            <p>Profissão: {personagem.job}</p>
+            <p>Local de Trabalho: {personagem.workplace}</p>
+            <p>Primeira Aparição: {personagem.firstAppearance}</p>
+            <p>Última Aparição: {personagem.lastAppearance}</p>
+            <p>Ator: {personagem.actor}</p>
+            <Link href="/api">Voltar</Link>
         </div>
     );
 }
