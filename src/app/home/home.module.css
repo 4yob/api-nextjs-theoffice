@@ -1,103 +1,39 @@
-.homeContainer {
-    display: flex;
-    background: url('../../../public/homebackground.png');
+.container {
     min-height: 100vh;
-    text-align: center;
-}
-
-.homeCard {
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
-    background: rgb(255, 255, 255);
-    border-top-right-radius: 30rem;
-    border-bottom-right-radius:30rem;
-    padding: 4rem 2rem;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);;
-    width: 50vw;
-    height: 100vh;
-}
-
-.badge {
-    background-color: #b1b1b1;
-    color: #ffffff;
-    padding: 0.25rem 0.75rem;
-    width: 350px;
-    border-radius: 9999px;
-    font-size: 1rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    display: inline-block;
-}
-
-.span {
-    margin: 0  0.5rem;
+    gap: 5rem;
+    background: linear-gradient(135deg, #797979 0%, #292929 25%, #000000 50%, #2e2e2e 75%, #636363 100%);
 }
 
 .title {
-    font-size: 2.25rem;
-    font-weight: 800;
-    margin: 2rem 0;
-}
-
-.description {
-    color: #646464;
-    margin: 0 1rem 1.5rem 1rem;
-    line-height: 1.6;
-    text-align: justify;
-    text-align-last: center;
+    color: white;
+    font-size: 8rem;
+    text-align: center;
+    font-family: var(--font-roboto-mono);
+    font-weight: 600;
 }
 
 .buttonContainer {
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
     gap: 1.5rem;
-    margin: 1rem;
 }
 
-.primaryButton {
-    background: linear-gradient(to right, #F59E0B , #EA580C);
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0070f3;
     color: white;
-    padding: 0.75rem 2rem;
-    font-size: 1rem;
-    font-weight: 500;
-    border-radius: 0.75rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 8px 15px #ffcb72;
-}
-
-.primaryButton:hover {
-    background: linear-gradient(to right, #EA580C, #F59E0B);
-    transform: scale(1.05);
-    box-shadow: 0 15px 20px #ffa06d;
-}
-
-.secondaryButton {
-    background: linear-gradient(to right, #968068, #cfb18a );
-    color: #ffffff;
-    padding: 0.75rem 2rem;
-    font-size: 1rem;
-    font-weight: 500;
-    border-radius: 0.75rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 8px 15px #dfc19a ;
-}
-
-.secondaryButton:hover {
-    background: linear-gradient(to right, #cfb18a, #968068);
-    transform: scale(1.05);
-    box-shadow: 0 15px 20px #d4b797;
-}
-
-.cardFooter {
-    border-top: 1px solid #b6b6b6;
-    padding-top: 1.5rem;
-    margin-top: 3rem;
-}
-
-.footerText {
-    color: #646464;
-    font-size: 0.75rem;
+    width: 20rem;
+    height: 3.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 1.5rem;
+    transition: background-color 0.3s ease;
 }
